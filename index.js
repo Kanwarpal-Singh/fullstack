@@ -4,13 +4,14 @@ const { connection } = require("./config/db")
 const { userRouter } = require("./routes/userRouter")
 const { noteRouter } = require("./routes/noteRouter");
 const { authenticate } = require("./middlewares/authenticate.middlewares");
+const cors = require("cors")
 require("dotenv").config()
 const port = process.env.PORT;
 console.log(port)
 
 const app = express();
 app.use(express.json())
-
+app.use(cors)
 app.use("/users",userRouter)
 app.use(authenticate)
 app.use("/notes",noteRouter)
